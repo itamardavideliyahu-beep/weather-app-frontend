@@ -2,7 +2,7 @@ name: CI
 
 on:
     push:
-        branches: [ main ]
+        branches: [ main, dev ]
 
 
 jobs:
@@ -11,6 +11,15 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
+            - name: Set image tag
+              id: tag
+              run: |
+                if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+                  echo "prefix=prod" >> $GITHUB_OUTPUT
+                else
+                  echo "prefix=dev" >> $GITHUB_OUTPUT
+                fi
+                echo "sha=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
             - name: Set up Node.js
               uses: actions/setup-node@v4
               with:
@@ -32,4 +41,4 @@ jobs:
                 context: .
                 push: true
                 tags: |
-                    ${{ secrets.DOCKER_USERNAME }}/weather-frontend:sha-${{ github.sha }}
+                    ${{ secrets.DOCKER_USERNAME }}/weather-frontend:${{ steps.tag.outputs.prefix }}-${{ steps.tag.outputs.sha }}
