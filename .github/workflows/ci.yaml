@@ -48,9 +48,9 @@ jobs:
               run: |
                 git clone https://x-access-token:${{ secrets.HELM_INFRA_TOKEN }}@github.com/itamardavideliyahu-beep/weather-helm-infra.git
                 cd weather-helm-infra
-                sed -i "s/^  tag:.*/  tag: \"${{ steps.tag.outputs.prefix }}-${{ steps.tag.outputs.sha }}\"/" charts/weather-frontend/values.yaml
+                sed -i "s/^  tag:.*/  tag: \"${{ steps.tag.outputs.prefix }}-${{ steps.tag.outputs.sha }}\"/" weather-helm-infra/charts/weather-frontend/values.yaml
                 git config user.email "ci-bot@github.com"
                 git config user.name "CI Bot"
-                git add charts/weather-frontend/values.yaml
+                git add weather-helm-infra/charts/weather-frontend/values.yaml
                 git commit -m "ci: update weather-frontend image tag to ${{ steps.tag.outputs.prefix }}-${{ steps.tag.outputs.sha }}"
                 git push
