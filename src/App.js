@@ -46,6 +46,10 @@ function App() {
         <header className="header">
           <h1>🌤️ Weather Dashboard</h1>
           <p className="subtitle">Check current weather for cities around the world</p>
+          <div className="author-badge">
+            <span className="author-label">DevOps Project by</span>
+            <span className="author-name">Itamar David Eliyahu</span>
+          </div>
         </header>
 
         <form onSubmit={handleSubmit} className="weather-form">
