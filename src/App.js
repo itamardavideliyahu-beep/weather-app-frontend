@@ -85,8 +85,11 @@ function App() {
             <div className="weather-header">
               <h2>{weatherData.city}</h2>
               <div className="temperature">{weatherData.temperature}°C</div>
+              {weatherData.feels_like != null && (
+                <div className="feels-like">Feels like {weatherData.feels_like}°C</div>
+              )}
             </div>
-            
+
             <div className="weather-description">
               {weatherData.description}
             </div>

@@ -324,6 +324,14 @@ body {
   letter-spacing: -2px;
 }
 
+.feels-like {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(168, 224, 99, 0.85);
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+
 .weather-description {
   text-align: center;
   font-size: 1.1rem;
