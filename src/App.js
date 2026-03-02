@@ -14,7 +14,9 @@ function App() {
     { key: 'newyork', label: 'New York' },
     { key: 'sydney', label: 'Sydney' },
     { key: 'capetown', label: 'Cape Town' },
-    { key: 'bangkok', label: 'Bangkok' }
+    { key: 'bangkok', label: 'Bangkok' },
+    { key: 'telaviv', label: 'Tel Aviv' },
+    { key: 'jerusalem', label: 'Jerusalem' }
   ];
 
   const handleSubmit = async (e) => {
