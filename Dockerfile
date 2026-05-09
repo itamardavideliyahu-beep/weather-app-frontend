@@ -15,6 +15,10 @@ RUN npm install
 COPY public/ ./public/
 COPY src/ ./src/
 
+# Declare build arg so Railway passes the env var into the Docker build
+ARG REACT_APP_BACKEND_URL
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+
 # Build the application (REACT_APP_* vars are read during build)
 RUN npm run build
 
