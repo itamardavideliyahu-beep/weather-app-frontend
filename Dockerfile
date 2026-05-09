@@ -3,7 +3,6 @@
 # Stage 1: Build the React application
 FROM node:18-alpine AS build
 
-# Set working directory
 WORKDIR /app
 
 # Copy package files
@@ -16,20 +15,19 @@ RUN npm install
 COPY public/ ./public/
 COPY src/ ./src/
 
-# Build the application
+# Build the application (REACT_APP_* vars are read during build)
 RUN npm run build
 
-# Stage 2: Serve with nginx
-FROM nginx:alpine
+# Stage 2: Serve static files with configurable port
+FROM node:18-alpine
 
-# Copy built assets from build stage
-COPY --from=build /app/build /usr/share/nginx/html
+WORKDIR /app
 
-# Bake in the nginx config that proxies /weather/* to the backend service
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Lightweight static server that can bind Railway PORT env var
+RUN npm install -g serve
 
-# Expose port 80
-EXPOSE 80
+COPY --from=build /app/build ./build
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+
+CMD ["sh", "-c", "serve -s build -l ${PORT:-3000}"]

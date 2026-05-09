@@ -7,8 +7,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Requests go to the same origin; nginx proxies /weather/* to the backend
-  const BACKEND_URL = '';
+  // Railway deployment: point to backend public URL via env var
+  const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000').replace(/\/+$/, '');
 
   const cities = [
     { key: 'newyork', label: 'New York' },
